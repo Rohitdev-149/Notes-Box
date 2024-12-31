@@ -21,7 +21,7 @@ const FloatingImages = () => {
           key={index}
           src={src}
           alt=""
-          className={`floating-image image-${index + 1}`}
+          className={`floating-image image-${index + 1} max-w-full h-auto`}
           style={{
             "--delay": `${index * 2}s`,
             "--duration": `${10 + index * 2}s`,
@@ -35,26 +35,28 @@ const FloatingImages = () => {
 
 function App() {
   return (
-    <div className="page-container">
+    <div className="page-container min-h-screen w-full overflow-x-hidden">
       <FloatingImages />
 
-      {/* Fixed Side Image */}
-      <div className="fixed left-0 top-1/3 hidden 2xl:block z-10">
+      {/* Fixed Side Image - Now responsive */}
+      <div className="fixed left-0 top-1/3 hidden lg:block z-10 w-[10vw] max-w-[160px] min-w-[100px]">
         <img
           src="https://img.freepik.com/free-vector/hand-drawn-flat-design-book-logo-collection_23-2149331026.jpg"
           alt="Decorative book"
-          className="w-40 opacity-90 transform hover:scale-105 transition-transform duration-300 side-book"
+          className="w-full opacity-90 transform hover:scale-105 transition-transform duration-300 side-book"
         />
       </div>
 
-      {/* Main Content */}
-      <div className="main-content pt-20">
+      {/* Main Content - Now responsive */}
+      <div className="main-content pt-16 md:pt-20 px-4 md:px-6 lg:px-8">
         <NavBar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/pastes" element={<Paste />} />
-          <Route path="/pastes/:pasteId" element={<ViewPaste />} />
-        </Routes>
+        <div className="max-w-7xl mx-auto">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/pastes" element={<Paste />} />
+            <Route path="/pastes/:pasteId" element={<ViewPaste />} />
+          </Routes>
+        </div>
       </div>
     </div>
   );
