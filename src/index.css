@@ -1,0 +1,279 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(79, 70, 229, 0.05),
+    rgba(147, 51, 234, 0.05)
+  );
+  background-attachment: fixed;
+}
+
+/* Add a semi-transparent overlay to improve content readability */
+.content-wrapper {
+  @apply relative z-10;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 rounded-full;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-400 rounded-full hover:bg-gray-500 transition-colors;
+}
+
+/* Button hover effects */
+button,
+a {
+  @apply transition-all duration-200;
+}
+
+/* Focus styles */
+input:focus,
+textarea:focus {
+  @apply outline-none;
+}
+
+/* Add these new classes after your existing styles */
+
+.page-container {
+  @apply relative min-h-screen overflow-x-hidden;
+}
+
+.decorative-book {
+  @apply fixed top-1/2 -translate-y-1/2 w-48 opacity-80 pointer-events-none;
+  z-index: 0;
+}
+
+.decorative-book.left {
+  @apply left-4;
+  transform: translateY(-50%) rotate(-15deg);
+}
+
+.decorative-book.right {
+  @apply right-4;
+  transform: translateY(-50%) rotate(15deg);
+}
+
+/* Adjust content wrapper for the new layout */
+.main-content {
+  @apply relative z-10 mx-auto max-w-4xl bg-transparent;
+}
+
+/* Add these new decorative background styles */
+.decorative-background-left,
+.decorative-background-right {
+  @apply absolute inset-0 overflow-hidden pointer-events-none;
+  z-index: -1;
+}
+
+.decorative-image {
+  @apply absolute opacity-60;
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Position multiple images */
+.book-1 {
+  @apply w-32 left-[5%] top-[15%];
+  animation-delay: 0s;
+}
+
+.book-2 {
+  @apply w-40 right-[8%] top-[25%];
+  animation-delay: 1s;
+  transform: rotate(15deg);
+}
+
+.book-3 {
+  @apply w-36 left-[12%] bottom-[20%];
+  animation-delay: 2s;
+  transform: rotate(-10deg);
+}
+
+.book-4 {
+  @apply w-28 right-[15%] bottom-[15%];
+  animation-delay: 3s;
+}
+
+.book-5 {
+  @apply w-24 left-[25%] top-[40%];
+  animation-delay: 1.5s;
+  transform: rotate(-5deg);
+}
+
+.book-6 {
+  @apply w-32 right-[20%] top-[45%];
+  animation-delay: 2.5s;
+  transform: rotate(8deg);
+}
+
+/* Floating animation */
+@keyframes float {
+  0% {
+    transform: translateY(0px) rotate(var(--rotation, 0deg));
+  }
+  50% {
+    transform: translateY(-20px) rotate(var(--rotation, 0deg));
+  }
+  100% {
+    transform: translateY(0px) rotate(var(--rotation, 0deg));
+  }
+}
+
+/* Add these styles for the side images */
+.side-image-container {
+  @apply transition-all duration-300;
+}
+
+.side-image-container:hover {
+  @apply scale-105;
+}
+
+/* Clean up unused styles */
+.decorative-background,
+.book-1,
+.book-2,
+.book-3,
+.book-4,
+.book-5,
+.book-6 {
+  display: none;
+}
+
+/* Replace previous decorative styles with these new ones */
+.floating-background {
+  @apply fixed inset-0 overflow-hidden pointer-events-none;
+  z-index: -1;
+}
+
+.floating-image {
+  @apply absolute w-32 opacity-50;
+  animation: float-random var(--duration) ease-in-out infinite;
+  animation-delay: var(--delay);
+  transform: scale(var(--scale));
+}
+
+.image-1 {
+  top: 15%;
+  left: 10%;
+}
+.image-2 {
+  top: 25%;
+  right: 15%;
+}
+.image-3 {
+  bottom: 20%;
+  left: 20%;
+}
+.image-4 {
+  bottom: 30%;
+  right: 25%;
+}
+.image-5 {
+  top: 45%;
+  left: 30%;
+}
+.image-6 {
+  top: 60%;
+  right: 10%;
+}
+
+@keyframes float-random {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg) scale(var(--scale));
+  }
+  25% {
+    transform: translate(50px, -30px) rotate(10deg)
+      scale(calc(var(--scale) * 1.1));
+  }
+  50% {
+    transform: translate(-20px, 50px) rotate(-5deg) scale(var(--scale));
+  }
+  75% {
+    transform: translate(-40px, -20px) rotate(-15deg)
+      scale(calc(var(--scale) * 0.95));
+  }
+}
+
+/* Add a subtle rotation animation */
+@keyframes slow-rotate {
+  from {
+    transform: rotate(0deg) scale(var(--scale));
+  }
+  to {
+    transform: rotate(360deg) scale(var(--scale));
+  }
+}
+
+/* Add hover effect for floating images */
+.floating-image:hover {
+  animation-play-state: paused;
+  opacity: 0.8;
+}
+
+/* Ensure content stays above background */
+.main-content {
+  @apply relative z-10;
+}
+
+/* Add styles for the fixed side book */
+.side-book {
+  @apply rounded-r-lg shadow-xl;
+  animation: gentle-sway 6s ease-in-out infinite;
+}
+
+@keyframes gentle-sway {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-5deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(-3deg);
+  }
+}
+
+/* Add hover effect */
+.side-book:hover {
+  animation-play-state: paused;
+  opacity: 1;
+}
+
+/* Dark mode styles for ReactQuill */
+.dark .quill-dark .ql-toolbar {
+  border-color: #4b5563;
+  background: #374151;
+}
+
+.dark .quill-dark .ql-container {
+  border-color: #4b5563;
+  background: #1f2937;
+}
+
+.dark .quill-dark .ql-editor {
+  color: white;
+}
+
+.dark .quill-dark .ql-picker {
+  color: white;
+}
+
+.dark .quill-dark .ql-stroke {
+  stroke: white;
+}
+
+.dark .quill-dark .ql-fill {
+  fill: white;
+}
